@@ -4,10 +4,12 @@ package com.example.lemonade
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -36,7 +38,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    LemonScreen()
+                    LemonApp()
                 }
             }
         }
@@ -44,42 +46,68 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun LemonScreen() {
-    var level by remember {
-        mutableStateOf(1)
-    }
-    val imageResource: Int
-    var squeezeCount = 0
-    val text: String
-    when (level) {
+fun LemonApp() {
+    var currentStep by remember { mutableStateOf(1) }
+    var squeezeCount by remember { mutableStateOf(0) }
+    when (currentStep) {
         1 -> {
-            imageResource = R.drawable.lemon_tree
-            text = stringResource(id = R.string.lemon_text1)
+            LemonTextAndImage(
+                textLabelResourceId = R.string.lemon_select,
+                drawableResourceId = R.drawable.lemon_tree,
+                contentDescriptionResourceId = R.string.lemon_tree_content_description,
+                onImageClick = {
+                    currentStep = 2
+                    squeezeCount = (2..4).random()
+                })
         }
         2 -> {
-            squeezeCount = (2..4).random()
-            imageResource = R.drawable.lemon_squeeze
-            text = stringResource(id = R.string.lemon_text2)
+            LemonTextAndImage(
+                textLabelResourceId = R.string.lemon_squeeze,
+                drawableResourceId = R.drawable.lemon_squeeze,
+                contentDescriptionResourceId = R.string.lemon_content_description,
+                onImageClick = {
+                    squeezeCount--
+                    if (squeezeCount == 0) {
+                        currentStep = 3
+                    }
+                })
         }
         3 -> {
-            imageResource = R.drawable.lemon_drink
-            text = stringResource(id = R.string.lemon_text3)
+            LemonTextAndImage(
+                textLabelResourceId = R.string.lemon_drink,
+                drawableResourceId = R.drawable.lemon_drink,
+                contentDescriptionResourceId = R.string.lemonade_content_description,
+                onImageClick = {
+                    currentStep = 4
+                })
         }
-        else -> {
-            imageResource = R.drawable.lemon_restart
-            text = stringResource(id = R.string.lemon_text4)
+        4 -> {
+            LemonTextAndImage(
+                textLabelResourceId = R.string.lemon_empty_glass,
+                drawableResourceId = R.drawable.lemon_restart,
+                contentDescriptionResourceId = R.string.empty_glass_content_description,
+                onImageClick = {
+                    currentStep = 1
+                })
         }
     }
+}
 
+@Composable
+fun LemonTextAndImage(
+    textLabelResourceId: Int,
+    drawableResourceId: Int,
+    contentDescriptionResourceId: Int,
+    onImageClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight(),
+        modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = text,
+            text = stringResource(id = textLabelResourceId),
             fontSize = 18.sp
         )
         Spacer(
@@ -87,23 +115,16 @@ fun LemonScreen() {
                 .height(16.dp)
         )
         Image(
-            painter = painterResource(id = imageResource),
-            contentDescription = null,
+            painter = painterResource(id = drawableResourceId),
+            contentDescription = stringResource(id = contentDescriptionResourceId),
             modifier = Modifier
-                .border(1.dp, Color.Red)
-                .clickable {
-                    if (level == 4) {
-                        level = 1
-                    } else if (level == 2) {
-                        if (squeezeCount == 0) {
-                            level++
-                        } else {
-                            squeezeCount--
-                        }
-                    } else {
-                        level++
-                    }
-                }
+                .wrapContentSize()
+                .border(
+                    BorderStroke(2.dp, Color(red = 105, green = 205, blue = 216)),
+                    shape = RoundedCornerShape(4.dp)
+                )
+                .clickable { onImageClick() }
+                .padding(16.dp)
         )
     }
 }
@@ -111,5 +132,5 @@ fun LemonScreen() {
 @Preview(showBackground = true)
 @Composable
 fun LemonScreen1() {
-    LemonScreen()
+    LemonApp()
 }
