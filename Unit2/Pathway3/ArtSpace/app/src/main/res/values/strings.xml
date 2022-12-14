@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">ArtSpace</string>
+    <string name="img1_title">방에 혼자 있을 때</string>
+    <string name="img1_name">Leellamarz</string>
+    <string name="img1_date">2018</string>
+    <string name="img2_title">악몽</string>
+    <string name="img2_name">ASH ISLAMD</string>
+    <string name="img2_date">2019</string>
+    <string name="img3_title">Good Morning</string>
+    <string name="img3_name">PENOMECO</string>
+    <string name="img3_date">2018</string>
+    <string name="img4_title">웬수</string>
+    <string name="img4_name">ZICO</string>
+    <string name="img4_date">2020</string>
+</resources>
