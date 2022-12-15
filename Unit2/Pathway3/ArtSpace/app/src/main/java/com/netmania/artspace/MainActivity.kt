@@ -174,66 +174,6 @@ fun ArtInfo(
 
     }
 
-//    Column(
-//        modifier = Modifier,
-//        verticalArrangement = Arrangement.Center,
-//        horizontalAlignment = Alignment.CenterHorizontally
-//    ) {
-//        Image(
-//            painter = painterResource(id = drawableResourceId),
-//            contentDescription = null,
-//            modifier = Modifier
-//                .wrapContentSize()
-//                .border(
-//                    BorderStroke(2.dp, Color(red = 0, green = 0, blue = 0, alpha = 255)),
-//                    shape = RoundedCornerShape(4.dp)
-//                )
-//                .padding(20.dp)
-//        )
-//    }
-//
-//    Column(
-//        modifier = Modifier.fillMaxSize(),
-//        verticalArrangement = Arrangement.Bottom,
-//        horizontalAlignment = Alignment.CenterHorizontally
-//    ) {
-//        Card(
-//            backgroundColor = MaterialTheme.colors.surface,
-//            elevation = 20.dp,
-//            modifier = Modifier.padding(20.dp)
-//        ) {
-//            Column(modifier = Modifier.padding(20.dp)) {
-//                Text(
-//                    text = stringResource(id = titleTextResourceId),
-//                    fontSize = 24.sp
-//                )
-//                Row {
-//                    Text(
-//                        text = stringResource(id = nameTextResourceId),
-//                        fontWeight = FontWeight.Bold
-//                    )
-//                    Text(text = " (${stringResource(id = dateTextResourceId)})")
-//                }
-//            }
-//        }
-//        Row(
-//            modifier = Modifier.padding(bottom = 10.dp)
-//        ) {
-//            Button(
-//                onClick = { onPreviousBtnClick() },
-//                modifier = Modifier.width(120.dp)
-//            ) {
-//                Text(text = "Previous")
-//            }
-//            Spacer(modifier = Modifier.width(30.dp))
-//            Button(
-//                onClick = { onNextBtnClick() },
-//                modifier = Modifier.width(120.dp)
-//            ) {
-//                Text(text = "Next")
-//            }
-//        }
-//    }
 }
 
 
