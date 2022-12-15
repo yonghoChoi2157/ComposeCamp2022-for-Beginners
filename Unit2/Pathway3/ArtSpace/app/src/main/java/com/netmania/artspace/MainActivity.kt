@@ -11,6 +11,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.Bottom
+import androidx.compose.ui.Alignment.Companion.BottomEnd
+import androidx.compose.ui.Alignment.Companion.BottomStart
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
+import androidx.compose.ui.Alignment.Companion.Start
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -48,7 +53,7 @@ fun ArtSpaceApp() {
                 titleTextResourceId = R.string.img1_title,
                 nameTextResourceId = R.string.img1_name,
                 dateTextResourceId = R.string.img1_date,
-                drawableResourceId = R.drawable.img,
+                drawableResourceId = R.drawable.leellamarz_img,
                 onPreviousBtnClick = {
                     currentStep = 4
                 },
@@ -111,66 +116,124 @@ fun ArtInfo(
     onPreviousBtnClick: () -> Unit,
     onNextBtnClick: () -> Unit
 ) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Image(
-            painter = painterResource(id = drawableResourceId),
-            contentDescription = null,
-            modifier = Modifier
-                .wrapContentSize()
-                .border(
-                    BorderStroke(2.dp, Color(red = 0, green = 0, blue = 0, alpha = 255)),
-                    shape = RoundedCornerShape(4.dp)
-                )
-                .padding(20.dp)
-        )
-    }
 
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Bottom,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Card(
-            backgroundColor = MaterialTheme.colors.surface,
-            elevation = 20.dp,
-            modifier = Modifier.padding(20.dp)
-        ) {
-            Column(modifier = Modifier.padding(20.dp)) {
-                Text(
-                    text = stringResource(id = titleTextResourceId),
-                    fontSize = 24.sp
-                )
-                Row {
-                    Text(
-                        text = stringResource(id = nameTextResourceId),
-                        fontWeight = FontWeight.Bold
+
+    Column {
+        Box(modifier = Modifier
+            .fillMaxSize()
+            .weight(1f), contentAlignment = Alignment.Center) {
+            Image(
+                painter = painterResource(id = drawableResourceId),
+                contentDescription = null,
+                modifier = Modifier
+                    .wrapContentSize()
+                    .border(
+                        BorderStroke(2.dp, Color(red = 0, green = 0, blue = 0, alpha = 255)),
+                        shape = RoundedCornerShape(4.dp)
                     )
-                    Text(text = " (${stringResource(id = dateTextResourceId)})")
+                    .padding(20.dp)
+            )
+        }
+
+        Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.BottomCenter) {
+            Card(
+                backgroundColor = MaterialTheme.colors.surface,
+                elevation = 20.dp,
+                modifier = Modifier.padding(20.dp)
+            ) {
+                Column(modifier = Modifier.padding(20.dp)) {
+                    Text(
+                        text = stringResource(id = titleTextResourceId),
+                        fontSize = 24.sp
+                    )
+                    Row {
+                        Text(
+                            text = stringResource(id = nameTextResourceId),
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(text = " (${stringResource(id = dateTextResourceId)})")
+                    }
                 }
             }
         }
-        Row(
-            modifier = Modifier.padding(bottom = 10.dp)
-        ) {
+        Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.BottomCenter) {
+
             Button(
                 onClick = { onPreviousBtnClick() },
-                modifier = Modifier.width(120.dp)
+                modifier = Modifier.width(130.dp).align(BottomStart).padding(start = 20.dp),
             ) {
                 Text(text = "Previous")
             }
-            Spacer(modifier = Modifier.width(30.dp))
             Button(
                 onClick = { onNextBtnClick() },
-                modifier = Modifier.width(120.dp)
+                modifier = Modifier.width(130.dp).align(BottomEnd).padding(end = 20.dp),
             ) {
                 Text(text = "Next")
             }
         }
+
     }
+
+//    Column(
+//        modifier = Modifier,
+//        verticalArrangement = Arrangement.Center,
+//        horizontalAlignment = Alignment.CenterHorizontally
+//    ) {
+//        Image(
+//            painter = painterResource(id = drawableResourceId),
+//            contentDescription = null,
+//            modifier = Modifier
+//                .wrapContentSize()
+//                .border(
+//                    BorderStroke(2.dp, Color(red = 0, green = 0, blue = 0, alpha = 255)),
+//                    shape = RoundedCornerShape(4.dp)
+//                )
+//                .padding(20.dp)
+//        )
+//    }
+//
+//    Column(
+//        modifier = Modifier.fillMaxSize(),
+//        verticalArrangement = Arrangement.Bottom,
+//        horizontalAlignment = Alignment.CenterHorizontally
+//    ) {
+//        Card(
+//            backgroundColor = MaterialTheme.colors.surface,
+//            elevation = 20.dp,
+//            modifier = Modifier.padding(20.dp)
+//        ) {
+//            Column(modifier = Modifier.padding(20.dp)) {
+//                Text(
+//                    text = stringResource(id = titleTextResourceId),
+//                    fontSize = 24.sp
+//                )
+//                Row {
+//                    Text(
+//                        text = stringResource(id = nameTextResourceId),
+//                        fontWeight = FontWeight.Bold
+//                    )
+//                    Text(text = " (${stringResource(id = dateTextResourceId)})")
+//                }
+//            }
+//        }
+//        Row(
+//            modifier = Modifier.padding(bottom = 10.dp)
+//        ) {
+//            Button(
+//                onClick = { onPreviousBtnClick() },
+//                modifier = Modifier.width(120.dp)
+//            ) {
+//                Text(text = "Previous")
+//            }
+//            Spacer(modifier = Modifier.width(30.dp))
+//            Button(
+//                onClick = { onNextBtnClick() },
+//                modifier = Modifier.width(120.dp)
+//            ) {
+//                Text(text = "Next")
+//            }
+//        }
+//    }
 }
 
 
